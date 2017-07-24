@@ -23,7 +23,7 @@ def initialize(window_size, caption, scale_factor=1):
     pg.display.set_caption(caption)
 
 
-def load_image(filename):
+def load_image(filename, rect=None, tileset=None):
     res_dir = en.get_resources_directory()
     os_filename = os.path.join(res_dir, filename)
 
@@ -42,7 +42,9 @@ def load_image(filename):
         image = pg.transform.scale(image, (width, height))
 
     GraphicsParams.loaded_images[os_filename] = image
-    return image
+    if rect == None and flags == None:
+        return image
+    return image, rect, flags
 
 
 def draw_image(image, position):
