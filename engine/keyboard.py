@@ -1,48 +1,49 @@
-class Keyboard:
-    _held_keys = {}
-    _pressed_keys = {}
-    _released_keys = {}
+class KeyboardParams:
+    def __init__(self):
+        pass
 
-    @staticmethod
-    def begin_new_frame(dt):
-        Keyboard._pressed_keys.clear()
-        Keyboard._released_keys.clear()
+    held_keys = {}
+    pressed_keys = {}
+    released_keys = {}
 
-        for key in Keyboard._held_keys.keys():
-            Keyboard._held_keys[key] += dt
 
-    @staticmethod
-    def register_key_up(key):
-        Keyboard._released_keys[key] = True
-        if key in Keyboard._held_keys.keys():
-            del Keyboard._held_keys[key]
-    
+def begin_new_frame(dt):
+    KeyboardParams.pressed_keys.clear()
+    KeyboardParams.released_keys.clear()
 
-    @staticmethod
-    def register_key_down(key):
-        Keyboard._pressed_keys[key] = True
-        Keyboard._held_keys[key] = 0
+    for key in KeyboardParams.held_keys.keys():
+        KeyboardParams.held_keys[key] += dt
 
-    @staticmethod
-    def was_pressed(key):
-        if key in Keyboard._pressed_keys.keys():
-            return True
-        return False
 
-    @staticmethod
-    def was_released(key):
-        if key in Keyboard._released_keys.keys():
-            return True
-        return False
+def register_key_up(key):
+    KeyboardParams.released_keys[key] = True
+    if key in KeyboardParams.held_keys.keys():
+        del KeyboardParams.held_keys[key]
 
-    @staticmethod
-    def is_held(key):
-        if key in Keyboard._held_keys.keys():
-            return True
-        return False
 
-    @staticmethod
-    def get_hold_time(key):
-        if key in Keyboard._held_keys.keys():
-            return Keyboard._held_keys[key]
+def register_key_down(key):
+    KeyboardParams.pressed_keys[key] = True
+    KeyboardParams.held_keys[key] = 0
 
+
+def was_pressed(key):
+    if key in KeyboardParams.pressed_keys.keys():
+        return True
+    return False
+
+
+def was_released(key):
+    if key in KeyboardParams.released_keys.keys():
+        return True
+    return False
+
+
+def is_held(key):
+    if key in KeyboardParams.held_keys.keys():
+        return True
+    return False
+
+
+def get_hold_time(key):
+    if key in KeyboardParams.held_keys.keys():
+        return KeyboardParams.held_keys[key]

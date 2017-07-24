@@ -40,7 +40,7 @@ class Animation:
         self.animation_rects = animation_rects
         self.num_frames = len(animation_rects)
         Animation._animations[os_filename] = self.animation_rects
-        en.GraphicalLogger.log("Loaded Animation" + os_filename)
+        en.graphical_logger.log("Loaded Animation" + os_filename)
         return animation_rects
 
     def get_new_frame(self, dt):

@@ -1,42 +1,40 @@
-class Mouse:
-    LEFT=0
-    MIDDLE=1
-    RIGHT=2
+class MouseParams:
+    def __init__(self):
+        pass
 
-    _held_buttons = [-1, -1, -1]
-    _pressed_buttons = [False, False, False]
-    _released_buttons = [False, False, False]
-
-    @staticmethod
-    def begin_new_frame(dt):
-        Mouse._pressed_buttons = [False, False, False]
-        Mouse._released_buttons = [False, False, False]
-
-        for k in range(3):
-            if Mouse._held_buttons != -1:
-                Mouse._held_buttons += dt
-
-    @staticmethod
-    def register_mouse_release(button):
-        Mouse._released_buttons[button]=True
-        Mouse._held_buttons[button] = -1
+    held_buttons = [-1, -1, -1]
+    pressed_buttons = [False, False, False]
+    released_buttons = [False, False, False]
 
 
-    @staticmethod
-    def register_mouse_press(button):
-        Mouse._pressed_buttons[button] = True
-        Mouse._held_buttons[button] = 0
+def begin_new_frame(dt):
+    MouseParams.pressed_buttons = [False, False, False]
+    MouseParams.released_buttons = [False, False, False]
 
-    @staticmethod
-    def was_pressed(button):
-        return Mouse._pressed_buttons[button]
+    for k in range(3):
+        if MouseParams.held_buttons != -1:
+            MouseParams.held_buttons += dt
 
-    @staticmethod
-    def was_released(button):
-        return Mouse._released_buttons[button]
 
-    @staticmethod
-    def is_held(button):
-        if Mouse._held_buttons[button] != 0:
-            return True
-        return False
+def register_mouse_release(button):
+    MouseParams.released_buttons[button] = True
+    MouseParams.held_buttons[button] = -1
+
+
+def register_mouse_press(button):
+    MouseParams.pressed_buttons[button] = True
+    MouseParams.held_buttons[button] = 0
+
+
+def was_pressed(button):
+    return MouseParams.pressed_buttons[button]
+
+
+def was_released(button):
+    return MouseParams.released_buttons[button]
+
+
+def is_held(button):
+    if MouseParams.held_buttons[button] != 0:
+        return True
+    return False

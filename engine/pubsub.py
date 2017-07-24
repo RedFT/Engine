@@ -1,34 +1,34 @@
 import engine as en
 
 
-class PubSub(object):
-    _subscriptions = {}
+class PubSubParams:
+    def __init__(self):
+        pass
 
-    @staticmethod
-    def subsribe(subscriber, event):
-        if event in PubSub._subscriptions.keys():
-            PubSub._subscriptions[event].append(subscriber)
-        else:
-            PubSub._subscriptions[event] = [subscriber]
+    subscriptions = {}
 
-    @staticmethod
-    def publish(event, publisher, data=None):
-        en.GraphicalLogger.log(
-            "Got event: " + str(event) + " from publisher: " + str(publisher))
 
-        if event not in PubSub._subscriptions.keys():
+def subscribe(subscriber, event):
+    if event in PubSubParams.subscriptions.keys():
+        PubSubParams.subscriptions[event].append(subscriber)
+    else:
+        PubSubParams.subscriptions[event] = [subscriber]
+
+
+def publish(event, publisher, data=None):
+    if event not in PubSubParams.subscriptions.keys():
+        return
+
+    for sub in PubSubParams.subscriptions[event]:
+        notify = getattr(sub, "notify", None)
+        if notify is None:
+            en.graphical_logger.log(
+                str(sub) + " has no member called notify.")
             return
-        for sub in PubSub._subscriptions[event]:
-            notify = getattr(sub, "notify", None)
-            if notify is None:
-                en.GraphicalLogger.log(
-                    str(sub) + " has no member called notify.")
-                return
 
-            if not callable(notify):
-                en.GraphicalLogger.log(
-                    str(sub) + "'s member,notify, is not callable.")
-                return
+        if not callable(notify):
+            en.graphical_logger.log(
+                str(sub) + "'s member, notify, is not callable.")
+            return
 
-            notify(event, publisher, data)
-
+        notify(event, publisher, data)

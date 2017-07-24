@@ -1,4 +1,7 @@
-class Scene:
+class Scene(object):
+    def __init__(self):
+        pass
+
     def initialize(self):
         raise NotImplementedError("Has not been implemented.")
 

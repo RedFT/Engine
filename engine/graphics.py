@@ -3,59 +3,63 @@ import pygame as pg
 import os
 
 
-class Graphics:
-    _scale_factor=1
-    _loaded_images = {}
-    _sprite_sheets = {}
-    _main_surface = None
-    _clear_color = (255, 255, 255, 255)
-
-    @staticmethod
-    def initialize(window_size, caption, scale_factor=1):
-        Graphics._main_surface = pg.display.set_mode(window_size)
-        pg.display.set_caption(caption)
-        Graphics._scale_factor = scale_factor
-        en.GraphicalLogger.log("Graphics Setup")
-
-    @staticmethod
-    def load_image(filename):
-        res_dir = en.get_resources_directory()
-        os_filename = os.path.join(res_dir, filename)
-        
-        if os_filename in Graphics._loaded_images.keys():
-            return Graphics._loaded_images[os_filename]
+class GraphicsParams:
+    main_surface = None
+    scale_factor = None
+    scale_factor = None
+    loaded_images = None
+    sprite_sheets = None
+    clear_color = None
 
 
-        en.GraphicalLogger.log("Loaded Image " + os_filename)
-        image = pg.image.load(os_filename)
-        image = image.convert_alpha()
+def initialize(window_size, caption, scale_factor=1):
+    GraphicsParams.main_surface = pg.display.set_mode(window_size)
+    GraphicsParams.scale_factor = scale_factor
+    GraphicsParams.scale_factor = 1
+    GraphicsParams.loaded_images = {}
+    GraphicsParams.sprite_sheets = {}
+    GraphicsParams.clear_color = (255, 255, 255, 255)
 
-        # resize
-        if Graphics._scale_factor != 1:
-            img_rect = image.get_rect()
-            width = img_rect.width * Graphics._scale_factor
-            height = img_rect.height * Graphics._scale_factor
-            image = pg.transform.scale(image, (width, height))
+    pg.display.set_caption(caption)
 
-        Graphics._loaded_images[os_filename] = image
-        return image
 
-    @staticmethod
-    def draw_image(image, position):
-        Graphics._main_surface.blit(image, position)
+def load_image(filename):
+    res_dir = en.get_resources_directory()
+    os_filename = os.path.join(res_dir, filename)
 
-    @staticmethod
-    def flip():
-        pg.display.flip()
+    if os_filename in GraphicsParams.loaded_images.keys():
+        return GraphicsParams.loaded_images[os_filename]
 
-    @staticmethod
-    def clear():
-        Graphics._main_surface.fill(Graphics._clear_color)
+    en.graphical_logger.log("Loaded Image " + os_filename)
+    image = pg.image.load(os_filename)
+    image = image.convert_alpha()
 
-    @staticmethod
-    def set_clear_color(clear_color):
-        Graphics._clear_color = clear_color
+    # resize
+    if GraphicsParams.scale_factor != 1:
+        img_rect = image.get_rect()
+        width = img_rect.width * GraphicsParams.scale_factor
+        height = img_rect.height * GraphicsParams.scale_factor
+        image = pg.transform.scale(image, (width, height))
 
-    @staticmethod
-    def get_main_surface():
-        return Graphics._main_surface
+    GraphicsParams.loaded_images[os_filename] = image
+    return image
+
+
+def draw_image(image, position):
+    GraphicsParams.main_surface.blit(image, position)
+
+
+def flip():
+    pg.display.flip()
+
+
+def clear():
+    GraphicsParams.main_surface.fill(GraphicsParams.clear_color)
+
+
+def set_clear_color(clear_color):
+    GraphicsParams.clear_color = clear_color
+
+
+def get_main_surface():
+    return GraphicsParams.main_surface
