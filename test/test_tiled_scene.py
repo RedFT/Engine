@@ -4,6 +4,10 @@ import engine as en
 import constants as cn
 
 
+def get_my_loader(filename, flags, **kwargs):
+    return en.graphics.load_image
+
+
 class TiledScene(en.Scene):
     def __init__(self):
         super(TiledScene, self).__init__()

@@ -1,6 +1,7 @@
 import json
 import engine as en
 import os
+import pygame as pg
 
 
 class Animation:
@@ -32,7 +33,7 @@ class Animation:
         for frame in frames:
             rect_dict = frame['frame']
             animation_rects.append(
-                (rect_dict['x'] * scale,
+                pg.Rect(rect_dict['x'] * scale,
                  rect_dict['y'] * scale,
                  rect_dict['w'] * scale,
                  rect_dict['h'] * scale))
@@ -43,9 +44,8 @@ class Animation:
         en.graphical_logger.log("Loaded Animation" + os_filename)
         return animation_rects
 
-    def get_new_frame(self, dt):
+    def get_new_frame_rect(self, dt):
         self.time_since_last_update += dt
-        self.time_since_last_update %= 1000
-        self.current_frame = int(self.time_since_last_update / self.ms_per_frame) % self.num_frames
-
-        return self.animation_rects[self.current_frame]
+        self.time_since_last_update %= (self.ms_per_frame * self.num_frames)
+        self.current_frame = int(self.time_since_last_update / self.ms_per_frame)
+        return self.animation_rects[self.current_frame].copy()

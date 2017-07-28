@@ -21,12 +21,12 @@ class App:
         en.graphics.set_clear_color((200, 200, 200))
 
         # create scene stack
-        self.scenes = [TiledScene()]
+        self.scenes = [TestScene()]
         self.scenes[-1].initialize()
 
     def main_loop(self):
         while self.scenes:
-            dt = self.game_clock.tick(30)
+            dt= self.game_clock.tick(30)
 
             # Event Handling
             got_quit = en.events.handle_events(dt)

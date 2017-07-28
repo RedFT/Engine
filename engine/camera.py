@@ -14,6 +14,9 @@ class Camera(object):
         self.y = entity.position[1] - self.window_size[1]/2
 
     def follow_object(self):
+        if self.object_to_follow is None:
+            return
+
         destination_x = self.object_to_follow.position[0] - self.window_size[0]/2
         destination_y = self.object_to_follow.position[1] - self.window_size[1]/2
 

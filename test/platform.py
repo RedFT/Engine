@@ -7,23 +7,19 @@ class Platform(en.Entity):
     def __init__(self, pos=(50, 0), size=(50, 10)):
         super(Platform, self).__init__(pos, size[0], size[1])
         en.pubsub.subscribe(self, "collision")
-        self.rect = np.concatenate([self.position-np.array(size)/2, size])
+        self.rect[0] -= size[0]/2
+        self.rect[1] -= size[1]/2
         self.size = np.array(size)
         self.slow_amount = .003
 
     def notify(self, event, sender, data):
         if event == "collision" and self in data:
             other = data[0] if data[1] is self else data[1]
-            from ball import Ball
-            if type(other) == Ball:
-                move_right = -1 if other.move_velocity > 0 else 1
-                if abs(other.move_velocity) < self.slow_amount:
-                    other.move_velocity = 0
-                else:
-                    other.move_velocity += .003*move_right
-                return
             if type(other) is en.Particle:
                 other.kill()
+                return
+
+            other.position[1] = self.rect.top-other.rect.height
 
     def update(self, dt):
         return self

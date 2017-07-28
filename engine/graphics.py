@@ -15,7 +15,7 @@ class GraphicsParams:
 def initialize(window_size, caption, scale_factor=1):
     GraphicsParams.main_surface = pg.display.set_mode(window_size)
     GraphicsParams.scale_factor = scale_factor
-    GraphicsParams.scale_factor = 1
+    GraphicsParams.scale_factor = scale_factor
     GraphicsParams.loaded_images = {}
     GraphicsParams.sprite_sheets = {}
     GraphicsParams.clear_color = (255, 255, 255, 255)
@@ -23,7 +23,7 @@ def initialize(window_size, caption, scale_factor=1):
     pg.display.set_caption(caption)
 
 
-def load_image(filename, rect=None, tileset=None):
+def load_image(filename):
     res_dir = en.get_resources_directory()
     os_filename = os.path.join(res_dir, filename)
 
@@ -36,15 +36,14 @@ def load_image(filename, rect=None, tileset=None):
 
     # resize
     if GraphicsParams.scale_factor != 1:
+        en.graphical_logger.log("Resizing image by factor of " + str(GraphicsParams.scale_factor))
         img_rect = image.get_rect()
         width = img_rect.width * GraphicsParams.scale_factor
         height = img_rect.height * GraphicsParams.scale_factor
         image = pg.transform.scale(image, (width, height))
 
     GraphicsParams.loaded_images[os_filename] = image
-    if rect == None and flags == None:
-        return image
-    return image, rect, flags
+    return image
 
 
 def draw_image(image, position):
