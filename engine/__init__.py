@@ -3,6 +3,7 @@ import graphical_logger
 import pubsub
 import events
 import keyboard
+import mouse
 import text
 
 
