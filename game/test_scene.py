@@ -4,19 +4,17 @@ import engine as en
 import constants as cn
 
 
-def get_my_loader(filename, flags, **kwargs):
-    return en.graphics.load_image
-
-
-class TiledScene(en.Scene):
+class TestScene(en.Scene):
     def __init__(self):
-        super(TiledScene, self).__init__()
+        super(TestScene, self).__init__()
 
     def initialize(self):
-        pass
+        self.camera = en.Camera(cn.WINDOW_SIZE)
+
 
     def update(self, dt):
-        pass
+        self.camera.update(dt)
+
 
     def draw(self):
         pass

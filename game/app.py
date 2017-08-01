@@ -3,7 +3,8 @@ import engine as en
 
 import constants as cn
 
-from hello import Hello
+from test_scene import TestScene
+from test_tiled_scene import TiledScene
 
 
 class App:
@@ -20,7 +21,7 @@ class App:
         en.graphics.set_clear_color((200, 200, 200))
 
         # create scene stack
-        self.scenes = [Hello()]
+        self.scenes = [TestScene()]
         self.scenes[-1].initialize()
 
     def main_loop(self):
