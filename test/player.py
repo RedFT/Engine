@@ -13,8 +13,9 @@ class Player(en.Entity):
         self.animation.load_animation_file("WalkingAnimationTemplate.json", cn.SCALE)
         self.rect = self.animation.get_new_frame_rect(0)
 
+        en.pubsub.subscribe(self, "collision")
+
     def update(self, dt):
-        print dt
         if (en.keyboard.is_held(pg.K_LEFT)):
             self.position[0] -= .1*dt
         if (en.keyboard.is_held(pg.K_RIGHT)):
@@ -32,4 +33,4 @@ class Player(en.Entity):
         en.graphics.draw_image(self.image_out, self.camera_coordinates)
 
     def notify(self, event, sender, data):
-        pass
+        print event
