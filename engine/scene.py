@@ -1,15 +1,20 @@
-class Scene(object):
+import engine as en
+
+
+class Scene(en.Node):
     def __init__(self):
-        pass
+        super(Scene, self).__init__()
 
     def initialize(self):
         raise NotImplementedError("Has not been implemented.")
 
     def update(self, dt):
-        raise NotImplementedError("Has not been implemented.")
+        for child in self.children:
+            child.update(dt)
 
     def draw(self):
-        raise NotImplementedError("Has not been implemented.")
+        for child in self.children:
+            child.draw()
 
     def pause(self):
         raise NotImplementedError("Has not been implemented.")

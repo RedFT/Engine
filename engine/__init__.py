@@ -5,9 +5,12 @@ import events
 import keyboard
 import mouse
 import text
+import tiled
 
 
 # import classes within modules
+from node import Node
+from app import App
 from entity import Entity
 from animation import Animation
 from camera import Camera
