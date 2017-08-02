@@ -31,11 +31,17 @@ def initialize(screen_size=(640, 420), caption="App", scale=1, show_fps=True):
     AppParams.scenes = []
 
 def push_scene(scene):
+    if AppParams.scenes != []:
+        AppParams.scenes[-1].exit()
+
     AppParams.scenes.append(scene)
     AppParams.scenes[-1].initialize()
+    AppParams.scenes[-1].enter()
 
 def pop_scene():
-    return AppParams.scenes.pop()
+    popped_scene = AppParams.scenes.pop()
+    popped_scene.exit()
+    AppParams.scenes[-1].enter()
 
 
 def main_loop():
