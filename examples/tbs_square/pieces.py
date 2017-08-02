@@ -96,7 +96,7 @@ class Warrior(Piece):
 
         draw_rect = pg.Rect(self.position_in_px[0]+pad_x, self.position_in_px[1]+pad_y,
             cn.CELL_WIDTH-2*pad_y, cn.CELL_HEIGHT-2*pad_y)
-        pg.draw.rect(surf, (50, 130, 50),
+        pg.draw.rect(surf, (130, 50, 50),
             draw_rect, 5)
 
 
@@ -118,7 +118,7 @@ class Ranger(Piece):
         p3 += self.position_in_px#np.array(self.cell_position) * cn.CELL_SIZE
 
         lines = [p1, p2, p3]
-        pg.draw.lines(surf, (130, 50, 50), True,
+        pg.draw.lines(surf, (50, 130, 50), True,
             lines, 5)
 
 
@@ -136,5 +136,5 @@ class Mage(Piece):
 
         radius = (cn.CELL_WIDTH - 2 * pad_x)/2
 
-        pg.draw.circle(surf, (130, 50, 50), cell_center,
+        pg.draw.circle(surf, (50, 50, 130), cell_center,
             radius, 5)

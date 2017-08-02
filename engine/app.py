@@ -48,6 +48,9 @@ class App:
             self.scenes[-1].update(dt)
             en.graphical_logger.update(dt)
 
+            # Handle Messages in Message Queue
+            en.pubsub.update(dt)
+
             # Game Rendering
             self.scenes[-1].draw()
 
