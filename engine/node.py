@@ -1,3 +1,5 @@
+import graphical_logger
+
 class Node(object):
     def __init__(self):
         self.children = []
@@ -6,7 +8,11 @@ class Node(object):
         self.children.append(node)
 
     def enter(self):
-        pass
+        graphical_logger.log("Entering " + self.__class__.__name__)
+        for child in self.children:
+            child.enter()
 
     def exit(self):
-        self.children = []
+        graphical_logger.log("Exiting " + self.__class__.__name__)
+        for child in self.children:
+            child.exit()
