@@ -28,12 +28,8 @@ def check_size(font_name, font_size, text):
     return load_font(font_name, font_size).size(text)
 
 
-def check_width(font_name, font_size, text):
-    return load_font(font_name, font_size).get_width(text)
-
-
 def check_height(font_name, font_size, text):
-    return load_font(font_name, font_size).get_height(text)
+    return load_font(font_name, font_size).get_height()
 
 
 def create_text(font_name, font_size, text, aa=False, color=(0, 0, 0)):
