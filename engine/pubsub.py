@@ -1,3 +1,6 @@
+"""Publisher/Subscriber model of message passing.
+"""
+
 import engine as en
 
 
@@ -11,9 +14,23 @@ class PubSubParams:
 
 def subscribe(subscriber, event):
     if event in PubSubParams.subscriptions.keys():
+        if subscriber in PubSubParams.subscriptions[event]:
+            return
         PubSubParams.subscriptions[event].append(subscriber)
     else:
         PubSubParams.subscriptions[event] = [subscriber]
+
+def unsubscribe(subscriber, event):
+    if event not in PubSubParams.subscriptions.keys():
+        print "Nothing is registered for " + event
+        return
+
+    if subscriber not in PubSubParams.subscriptions[event]:
+        print str(subscriber) + " is not registered for " + event
+        return
+
+    PubSubParams.subscriptions[event].remove(subscriber)
+
 
 
 def publish(event, publisher, data=None):
