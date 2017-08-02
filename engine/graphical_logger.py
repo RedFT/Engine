@@ -41,7 +41,11 @@ def log(message):
     mult_line = textwrap.fill(text, GraphicalLoggerParams.num_char_per_line)
     surf = en.text.create_multiline_text("Unique.ttf", 16, mult_line,
                                          aa=True, color=GraphicalLoggerParams.text_color)
-    GraphicalLoggerParams.log_queue.append([surf, 0.])
+    surf_rect = surf.get_rect()
+    bg_surf = pg.Surface(surf.get_size())
+    pg.draw.rect(bg_surf, (255, 255, 255), surf.get_rect(), 0)
+    bg_surf.blit(surf, (0, 0))
+    GraphicalLoggerParams.log_queue.append([bg_surf, 0.])
     return
 
 
