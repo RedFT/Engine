@@ -1,9 +1,10 @@
 import numpy as np
-import engine as en
 import pygame as pg
 
+from engine.engine import particles
 
-class SmokeMachine(en.ParticleEmitter):
+
+class SmokeMachine(particles.ParticleEmitter):
     def __init__(self, emit_rate, size, angle, hang_time, age_rate, fade_rate, position):
         super(SmokeMachine, self).__init__(emit_rate, position)
         self.angle = angle
@@ -23,12 +24,11 @@ class SmokeMachine(en.ParticleEmitter):
         rand_color = self.colors[np.random.randint(0, 3)]
         direction = np.random.randint(self.angle - 5, self.angle + 5)
         behaviors = [
-            en.ParticleBehaviors.get_age_callback(self.age_rate),
-            en.ParticleBehaviors.get_wind_callback(2, 30),
-            en.ParticleBehaviors.get_fade_callback(self.fade_rate),
-            en.ParticleBehaviors.get_grow_callback(0.08),
-            en.ParticleBehaviors.get_movement_callback(7, direction),
-            en.ParticleBehaviors.get_deathtime_callback(death_time)]
-        p = en.Particle(self.position, random_size, rand_color, behaviors)
+            particles.ParticleBehaviors.get_age_callback(self.age_rate),
+            particles.ParticleBehaviors.get_wind_callback(2, 30),
+            particles.ParticleBehaviors.get_fade_callback(self.fade_rate),
+            particles.ParticleBehaviors.get_grow_callback(0.08),
+            particles.ParticleBehaviors.get_movement_callback(7, direction),
+            particles.ParticleBehaviors.get_deathtime_callback(death_time)]
+        p = particles.Particle(self.position, random_size, rand_color, behaviors)
         self.particles.append(p)
-

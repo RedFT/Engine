@@ -6,7 +6,7 @@ import constants as cn
 from board import Board
 from pieces import Warrior, Ranger, Mage
 
-class TestScene(en.Scene):
+class TestScene(en.scene.Scene):
     def __init__(self):
         super(TestScene, self).__init__()
 

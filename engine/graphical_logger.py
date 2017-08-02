@@ -17,6 +17,7 @@ class GraphicalLoggerParams:
     text_life = None
     position = None
     padding = None
+    text_color = (255, 0, 0)
 
 
 def initialize(position=(0, 0), width=100, text_life=1000., chars_per_line=50, padding=10):
@@ -39,7 +40,7 @@ def log(message):
     text = str(time.strftime('%X')) + ": " + message
     mult_line = textwrap.fill(text, GraphicalLoggerParams.num_char_per_line)
     surf = en.text.create_multiline_text("Unique.ttf", 16, mult_line,
-                                         aa=True, color=(100, 100, 220))
+                                         aa=True, color=GraphicalLoggerParams.text_color)
     GraphicalLoggerParams.log_queue.append([surf, 0.])
     return
 

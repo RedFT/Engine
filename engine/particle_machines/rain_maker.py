@@ -1,9 +1,9 @@
 import numpy as np
-import engine as en
 import pygame as pg
+from engine.engine import particles
 
 
-class RainMaker(en.ParticleEmitter):
+class RainMaker(particles.ParticleEmitter):
     def __init__(self, emit_rate, size, angle, hang_time, age_rate, fade_rate, window_size):
         super(RainMaker, self).__init__(emit_rate, (0, 0))
         self.angle = angle
@@ -41,14 +41,13 @@ class RainMaker(en.ParticleEmitter):
 
         # Setup behavior of particle
         behaviors = [
-            en.ParticleBehaviors.get_age_callback(self.age_rate),
-            en.ParticleBehaviors.get_wind_callback(5, 30),
-            en.ParticleBehaviors.get_fade_callback(self.fade_rate),
-            en.ParticleBehaviors.get_movement_callback(30, direction),
-            en.ParticleBehaviors.get_deathtime_callback(deathtime)
+            particles.ParticleBehaviors.get_age_callback(self.age_rate),
+            particles.ParticleBehaviors.get_wind_callback(5, 30),
+            particles.ParticleBehaviors.get_fade_callback(self.fade_rate),
+            particles.ParticleBehaviors.get_movement_callback(30, direction),
+            particles.ParticleBehaviors.get_deathtime_callback(deathtime)
             ]
 
         # Create particle
-        p = en.Particle((random_x, random_y), random_size, random_color, behaviors)
+        p = particles.Particle((random_x, random_y), random_size, random_color, behaviors)
         self.particles.append(p)
-

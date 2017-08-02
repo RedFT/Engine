@@ -1,9 +1,11 @@
 import pygame as pg
-import engine as en
 import numpy as np
 
+import graphics
+import entity
 
-class Particle(en.Entity):
+
+class Particle(entity.Entity):
     def __init__(self, position, size, color, strategies):
         super(Particle, self).__init__(position, size, size)
         self.x, self.y = self.position
@@ -126,5 +128,4 @@ class ParticleEmitter(object):
             s.set_alpha(int(p.alpha * 255))
 
             draw_position = np.array(p.camera_coordinates)
-            en.graphics.draw_image(s, draw_position - p.size)
-
+            graphics.draw_image(s, draw_position - p.size)

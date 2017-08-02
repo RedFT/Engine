@@ -1,7 +1,7 @@
 import engine as en
+import node
 
-
-class Scene(en.Node):
+class Scene(node.Node):
     def __init__(self):
         super(Scene, self).__init__()
 

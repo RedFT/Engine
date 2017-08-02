@@ -1,7 +1,7 @@
 import pygame as pg
-import engine as en
+import node
 
-class Entity(en.Node):
+class Entity(node.Node):
     def __init__(self, position, width, height):
         super(Entity, self).__init__()
         self.position = list(position)

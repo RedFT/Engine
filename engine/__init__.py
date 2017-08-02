@@ -6,17 +6,14 @@ import keyboard
 import mouse
 import text
 import tiled
-
-
-# import classes within modules
-from node import Node
-from app import App
-from entity import Entity
-from animation import Animation
-from camera import Camera
-from scene import Scene
-from state import State
-from particle_emitter import Particle, ParticleBehaviors, ParticleEmitter
+import node
+import entity
+import app
+import animation
+import camera
+import scene
+import state
+import particles
 
 from resources import get_resources_directory
 
