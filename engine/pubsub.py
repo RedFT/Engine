@@ -20,13 +20,18 @@ def subscribe(subscriber, event):
     else:
         PubSubParams.subscriptions[event] = [subscriber]
 
+def unsubscribe_to_all_events(subscriber):
+    for event in PubSubParams.subscriptions.keys():
+        if subscriber not in PubSubParams.subscriptions[event]:
+            return
+
+        PubSubParams.subscriptions[event].remove(subscriber)
+
 def unsubscribe(subscriber, event):
     if event not in PubSubParams.subscriptions.keys():
-        print "Nothing is registered for " + event
         return
 
     if subscriber not in PubSubParams.subscriptions[event]:
-        print str(subscriber) + " is not registered for " + event
         return
 
     PubSubParams.subscriptions[event].remove(subscriber)
