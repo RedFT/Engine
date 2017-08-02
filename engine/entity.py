@@ -2,10 +2,9 @@ import pygame as pg
 import node
 
 class Entity(node.Node):
-    def __init__(self, position, width, height):
+    def __init__(self, position):
         super(Entity, self).__init__()
         self.position = list(position)
-        self.rect = pg.Rect(list(position) + [width, height])
         self.camera_coordinate = position
 
     def update(self, dt):
