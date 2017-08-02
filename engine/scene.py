@@ -21,6 +21,3 @@ class Scene(node.Node):
 
     def resume(self):
         raise NotImplementedError("Has not been implemented.")
-
-    def exit(self):
-        raise NotImplementedError("Has not been implemented.")
