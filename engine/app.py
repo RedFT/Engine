@@ -49,12 +49,12 @@ def main_loop():
         print "No scenes on scene stack"
 
     while AppParams.scenes:
-        dt= AppParams.game_clock.tick(30)
+        dt= AppParams.game_clock.tick(60)
 
         # Event Handling
         got_quit = en.events.handle_events(dt)
-        if got_quit or en.keyboard.was_pressed(pg.K_ESCAPE):
-            break
+        if got_quit:
+            quit()
 
         # Game Logic
         AppParams.scenes[-1].update(dt)
@@ -75,14 +75,14 @@ def main_loop():
         current_x = 0
         current_y = AppParams.screen_height - en.text.check_height('Unique.ttf', 16, 'test')
         for scene in AppParams.scenes:
-            scene_name = " -> " + scene.__class__.__name__
+            scene_name = "_" + scene.__class__.__name__ + "_"
             scene_name_surf = en.text.create_text('Unique.ttf', 16, scene_name, aa=True)
 
             text_rect = scene_name_surf.get_rect()
             #pg.draw.rect(scene_name_surf, (200, 200, 200), text_rect, 1)
             en.graphics.draw_image(scene_name_surf, (current_x, current_y))
 
-            current_x += text_rect.width
+            current_y -= text_rect.height
 
         # Draw Logger
         en.graphical_logger.draw()
