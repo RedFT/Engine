@@ -9,12 +9,14 @@ class AppParams:
         caption = None
         scale = None
         show_fps = None
+        show_scene_stack = None
 
-def initialize(screen_size=(640, 420), caption="App", scale=1, show_fps=True):
+def initialize(screen_size=(640, 420), caption="App", scale=1, show_fps=True, show_scene_stack=True):
     AppParams.screen_width, AppParams.screen_height = AppParams.screen_size = screen_size
     AppParams.caption = caption
     AppParams.scale = scale
     AppParams.show_fps = show_fps
+    AppParams.show_scene_stack = show_scene_stack
 
     # initialize pygame
     pg.init()
@@ -72,17 +74,18 @@ def main_loop():
             fps_surf = en.text.create_text('Unique.ttf', 16, "%.2ffps" % (int(fps)), aa=True)
             en.graphics.draw_image(fps_surf, (AppParams.screen_width - fps_surf.get_rect().width, 0))
 
-        current_x = 0
-        current_y = AppParams.screen_height - en.text.check_height('Unique.ttf', 16, 'test')
-        for scene in AppParams.scenes:
-            scene_name = "_" + scene.__class__.__name__ + "_"
-            scene_name_surf = en.text.create_text('Unique.ttf', 16, scene_name, aa=True)
+        if AppParams.show_scene_stack:
+            current_x = 0
+            current_y = AppParams.screen_height - en.text.check_height('Unique.ttf', 16, 'test')
+            for scene in AppParams.scenes:
+                scene_name = "_" + scene.__class__.__name__ + "_"
+                scene_name_surf = en.text.create_text('Unique.ttf', 16, scene_name, aa=True)
 
-            text_rect = scene_name_surf.get_rect()
-            #pg.draw.rect(scene_name_surf, (200, 200, 200), text_rect, 1)
-            en.graphics.draw_image(scene_name_surf, (current_x, current_y))
+                text_rect = scene_name_surf.get_rect()
+                #pg.draw.rect(scene_name_surf, (200, 200, 200), text_rect, 1)
+                en.graphics.draw_image(scene_name_surf, (current_x, current_y))
 
-            current_y -= text_rect.height
+                current_y -= text_rect.height
 
         # Draw Logger
         en.graphical_logger.draw()
