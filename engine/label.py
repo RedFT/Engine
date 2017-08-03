@@ -1,6 +1,7 @@
 import graphics
 import text
 import entity
+import app
 
 class Label(entity.Entity):
     def __init__(self, text, font="Unique.ttf", size=16, position=(0, 0), color=(255, 255, 255), aa=True):
@@ -69,7 +70,8 @@ class Label(entity.Entity):
         pass
 
     def draw(self):
-        graphics.draw_image(self.image, self.draw_position)
+        surf = app.get_current_scene().scene_surface
+        surf.blit(self.image, self.draw_position)
 
     def notify(self, event, sender, data):
         pass

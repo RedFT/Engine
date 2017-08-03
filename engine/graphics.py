@@ -61,6 +61,8 @@ def clear():
 def set_clear_color(clear_color):
     GraphicsParams.clear_color = clear_color
 
+def get_clear_color():
+    return GraphicsParams.clear_color
 
 def get_main_surface():
     return GraphicsParams.main_surface

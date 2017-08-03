@@ -32,6 +32,12 @@ def initialize(screen_size=(640, 420), caption="App", scale=1, show_fps=True, sh
     # create scene stack
     AppParams.scenes = []
 
+def get_current_scene():
+    return AppParams.scenes[-1]
+
+def get_screen_size():
+    return AppParams.screen_size
+
 def push_scene(scene):
     if AppParams.scenes != []:
         AppParams.scenes[-1].exit()
@@ -45,6 +51,15 @@ def pop_scene():
     popped_scene.exit()
     AppParams.scenes[-1].enter()
 
+def pop_to_scene(index):
+    if len(AppParams.scenes) <= index:
+        raise IndexError
+
+    if AppParams.scenes != []:
+        AppParams.scenes[-1].exit()
+
+    AppParams.scenes = AppParams.scenes[:index+1]
+    AppParams.scenes[-1].enter()
 
 def main_loop():
     if AppParams.scenes == []:
@@ -67,6 +82,9 @@ def main_loop():
 
         # Game Rendering
         AppParams.scenes[-1].draw()
+
+        en.graphics.draw_image(AppParams.scenes[-1].scene_surface,
+            (0, 0))
 
         # Some debugging text on screen
         if AppParams.show_fps:

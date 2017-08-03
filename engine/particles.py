@@ -3,7 +3,7 @@ import numpy as np
 
 import graphics
 import entity
-
+import app
 
 class Particle(entity.Entity):
     def __init__(self, position, size, color, strategies):
@@ -45,7 +45,8 @@ class Particle(entity.Entity):
         s.set_alpha(int(self.alpha * 255))
 
         draw_position = np.array(self.position)
-        graphics.draw_image(s, draw_position - self.size)
+        surf = app.get_current_scene().scene_surface
+        surf.blit(s, draw_position - self.size)
 
     def notify(self, event, sender, data):
         pass
@@ -97,9 +98,11 @@ class ParticleBehaviors:
     @staticmethod
     def get_wind_callback(move_amount, strength):
         def _wind(particle):
+            '''
+            particle.x += np.random.randint(0, move_amount)
+            '''
             if np.random.randint(0, 100) < strength:
                 particle.x += move_amount
-
         return _wind
 
 
