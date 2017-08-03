@@ -7,7 +7,7 @@ import entity
 
 class Particle(entity.Entity):
     def __init__(self, position, size, color, strategies):
-        super(Particle, self).__init__(position, size, size)
+        super(Particle, self).__init__(position)
         self.x, self.y = self.position
         self.color = color
         self.size = size
@@ -27,6 +27,28 @@ class Particle(entity.Entity):
     def update(self, dt):
         for s in self.strategies:
             s(self)
+
+    def draw(self):
+        if self.alpha < 0:
+            self.kill()
+
+        if self.alive == -1:
+            return
+
+        s = pg.Surface((2 * self.size, 2 * self.size))
+        s.convert_alpha()
+        s.fill((255, 255, 255))
+        s.set_colorkey((255, 255, 255))
+
+        pg.draw.circle(s, self.color,
+                       map(int, (self.size, self.size)), int(self.size))
+        s.set_alpha(int(self.alpha * 255))
+
+        draw_position = np.array(self.position)
+        graphics.draw_image(s, draw_position - self.size)
+
+    def notify(self, event, sender, data):
+        pass
 
 
 class ParticleBehaviors:
@@ -81,11 +103,11 @@ class ParticleBehaviors:
         return _wind
 
 
-class ParticleEmitter(object):
+class ParticleEmitter(entity.Entity):
     def __init__(self, emit_rate, position):
+        super(ParticleEmitter, self).__init__(position)
         self.particles = []
         self.emit_rate = emit_rate
-        self.position = position
 
     def set_pos(self, pos):
         self.position = pos
@@ -113,19 +135,7 @@ class ParticleEmitter(object):
 
     def draw(self):
         for p in self.particles:
-            if p.alpha < 0:
-                p.kill()
-            if p.alive == -1:
-                continue
+            p.draw()
 
-            s = pg.Surface((2 * p.size, 2 * p.size))
-            s.convert_alpha()
-            s.fill((255, 255, 255))
-            s.set_colorkey((255, 255, 255))
-
-            pg.draw.circle(s, p.color,
-                           map(int, (p.size, p.size)), int(p.size))
-            s.set_alpha(int(p.alpha * 255))
-
-            draw_position = np.array(p.camera_coordinates)
-            graphics.draw_image(s, draw_position - p.size)
+    def notify(self, event, sender, data):
+        pass
