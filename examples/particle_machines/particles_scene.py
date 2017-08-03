@@ -32,7 +32,7 @@ class ParticlesScene(en.scene.Scene):
 
     def enter(self):
         super(ParticlesScene, self).enter()
-        en.graphics.set_clear_color((0, 0, 0))
+        en.graphics.set_clear_color((10, 10, 50))
 
     def pause(self):
         pass

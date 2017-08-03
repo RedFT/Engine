@@ -42,7 +42,7 @@ class RainMaker(en.particles.ParticleEmitter):
         # Setup behavior of particle
         behaviors = [
             en.particles.ParticleBehaviors.get_age_callback(self.age_rate),
-            #en.particles.ParticleBehaviors.get_wind_callback(5, 30),
+            en.particles.ParticleBehaviors.get_wind_callback(4, 100),
             en.particles.ParticleBehaviors.get_fade_callback(self.fade_rate),
             en.particles.ParticleBehaviors.get_movement_callback(self.move_speed, direction),
             en.particles.ParticleBehaviors.get_deathtime_callback(deathtime)

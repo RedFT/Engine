@@ -78,7 +78,8 @@ class Piece(en.entity.Entity):
         self.rect[:2] = self.position_in_px
 
     def draw(self):
-        en.graphics.draw_image(self.image, self.position_in_px)
+        surf = en.app.get_current_scene().scene_surface
+        surf.blit(self.image, self.position_in_px)
 
     def set_cell(self, cell):
         self.cell_position = cell

@@ -50,27 +50,16 @@ class Board(en.entity.Entity):
 
 
     def draw(self):
-        surf = en.graphics.get_main_surface()
-        if self.tiles is None:
-            for x in xrange(self.width_in_cells+1):
-                pg.draw.line(surf, (255, 0, 0),
-                    (x*cn.CELL_WIDTH, 0),
-                    (x*cn.CELL_WIDTH, self.rect.bottom))
+        surf = en.app.get_current_scene().scene_surface
+        map_height = self.tiles['height']
+        map_width = self.tiles['width']
+        for i, tile in enumerate(self.tiles['data']):
+            x = (i % cn.BOARD_WIDTH) * cn.CELL_WIDTH
+            y = (i / cn.BOARD_WIDTH) * cn.CELL_WIDTH
 
-            for y in xrange(self.height_in_cells+1):
-                pg.draw.line(surf, (255, 0, 0),
-                    (0, y*cn.CELL_HEIGHT),
-                    (self.rect.right, y*cn.CELL_HEIGHT))
-        else:
-            map_height = self.tiles['height']
-            map_width = self.tiles['width']
-            for i, tile in enumerate(self.tiles['data']):
-                x = (i % cn.BOARD_WIDTH) * cn.CELL_WIDTH
-                y = (i / cn.BOARD_WIDTH) * cn.CELL_WIDTH
-
-                rect = self.tiles['rects'][tile]
-                tile_img = self.tiles['image'].subsurface(rect)
-                en.graphics.draw_image(tile_img, (x, y))
+            rect = self.tiles['rects'][tile]
+            tile_img = self.tiles['image'].subsurface(rect)
+            surf.blit(tile_img, (x, y))
 
         # Draw available moves if an entity is selected
         if self.selected_entity:
