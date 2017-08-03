@@ -22,11 +22,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"16x16-tiles_0.png",
+         "image":"16x16_tiles.png",
          "imageheight":86,
          "imagewidth":120,
          "margin":1,
-         "name":"16x16-tiles_0",
+         "name":"16x16_tiles",
          "properties":
             {
 
