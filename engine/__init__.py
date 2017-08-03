@@ -14,8 +14,7 @@ import camera
 import scene
 import state
 import particles
+import label
+import menu
 
 from resources import get_resources_directory
-
-# import sample particle machines
-import particle_machines
