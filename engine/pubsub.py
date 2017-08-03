@@ -25,6 +25,7 @@ def unsubscribe_to_all_events(subscriber):
         if subscriber not in PubSubParams.subscriptions[event]:
             return
 
+        #print "Unsubscribing " + subscriber.__class__.__name__ + " from " + event
         PubSubParams.subscriptions[event].remove(subscriber)
 
 def unsubscribe(subscriber, event):
