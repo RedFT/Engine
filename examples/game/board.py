@@ -28,7 +28,7 @@ class Board(en.entity.Entity):
         en.pubsub.subscribe(self, "selected")
 
     def exit(self):
-        en.pubsub.unsubscribe_to_all_events(self)
+        en.pubsub.unsubscribe_to_all_messages(self)
 
     def update(self, dt):
         mouse_pos = en.mouse.get_position()

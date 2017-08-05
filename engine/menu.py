@@ -18,7 +18,7 @@ class Menu(entity.Entity):
 
     def exit(self):
         super(Menu, self).exit()
-        pubsub.unsubscribe_to_all_events(self)
+        pubsub.unsubscribe_to_all_messages(self)
 
     def update(self, dt):
         if mouse.was_pressed(0):

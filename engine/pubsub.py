@@ -47,7 +47,7 @@ def handle_messages(dt=0):
             notify = getattr(sub, "notify", None)
             if notify is None:
                 return
-            notify(message, publisher, data)
+            sub.notify(message, publisher, *data)
 
     # clear message queue
     PubSubParams.message_queue = []

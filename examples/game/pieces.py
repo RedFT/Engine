@@ -53,7 +53,7 @@ class Piece(en.entity.Entity):
         en.pubsub.subscribe(self, "move_piece")
 
     def exit(self):
-        en.pubsub.unsubscribe_to_all_events(self)
+        en.pubsub.unsubscribe_to_all_messages(self)
 
 
     def lerp(self, current_position, pieces, A=None, B=None):
