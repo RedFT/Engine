@@ -1,4 +1,4 @@
-import graphical_logger
+from engine import graphical_logger
 
 class Node(object):
     def __init__(self):

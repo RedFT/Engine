@@ -1,9 +1,9 @@
 import pygame as pg
 import numpy as np
 
-import graphics
-import entity
-import app
+from engine import graphics
+from engine import entity
+from engine import app
 
 class Particle(entity.Entity):
     def __init__(self, position, size, color, strategies):

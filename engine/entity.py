@@ -1,5 +1,5 @@
 import pygame as pg
-import node
+from engine import node
 
 class Entity(node.Node):
     def __init__(self, position):

@@ -3,7 +3,6 @@ import pygame as pg
 import numpy as np
 
 import time
-
 import textwrap
 
 

@@ -1,7 +1,7 @@
-import graphics
-import text
-import entity
-import app
+from engine import graphics
+from engine import text
+from engine import entity
+from engine import app
 
 class Label(entity.Entity):
     def __init__(self, text, font="Unique.ttf", size=16, position=(0, 0), color=(255, 255, 255), aa=True):

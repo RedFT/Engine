@@ -1,6 +1,6 @@
-import entity
-import pubsub
-import mouse
+from engine import entity
+from engine import pubsub
+from engine import mouse
 
 class Menu(entity.Entity):
     """A Menu object for storing 'selectable' labels."""

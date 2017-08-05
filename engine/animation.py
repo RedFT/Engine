@@ -1,7 +1,7 @@
 import json
-import engine as en
 import os
 import pygame as pg
+import engine as en
 
 
 class Animation:

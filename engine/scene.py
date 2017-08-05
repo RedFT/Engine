@@ -1,8 +1,8 @@
 import pygame as pg
 
-import app
-import node
-import graphics
+from engine import app
+from engine import node
+from engine import graphics
 
 class Scene(node.Node):
     def __init__(self):

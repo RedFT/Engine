@@ -1,6 +1,6 @@
 import pygame as pg
-import keyboard
-import mouse
+from engine import keyboard
+from engine import mouse
 
 
 def handle_events(dt):
