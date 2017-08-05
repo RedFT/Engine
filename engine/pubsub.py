@@ -1,9 +1,3 @@
-"""Publisher/Subscriber model of message passing.
-"""
-
-import engine as en
-
-
 class PubSubParams:
     def __init__(self):
         pass
@@ -12,57 +6,48 @@ class PubSubParams:
     message_queue = []
 
 
-def subscribe(subscriber, event):
-    if event in PubSubParams.subscriptions.keys():
-        if subscriber in PubSubParams.subscriptions[event]:
+def subscribe(subscriber, message):
+    if message in PubSubParams.subscriptions.keys():
+        if subscriber in PubSubParams.subscriptions[message]:
             return
-        PubSubParams.subscriptions[event].append(subscriber)
+        PubSubParams.subscriptions[message].append(subscriber)
     else:
-        PubSubParams.subscriptions[event] = [subscriber]
+        PubSubParams.subscriptions[message] = [subscriber]
 
-def unsubscribe_to_all_events(subscriber):
-    for event in PubSubParams.subscriptions.keys():
-        if subscriber not in PubSubParams.subscriptions[event]:
+def unsubscribe_to_all_messages(subscriber):
+    for message in PubSubParams.subscriptions.keys():
+        if subscriber not in PubSubParams.subscriptions[message]:
             return
 
-        #print "Unsubscribing " + subscriber.__class__.__name__ + " from " + event
-        PubSubParams.subscriptions[event].remove(subscriber)
+        PubSubParams.subscriptions[message].remove(subscriber)
 
-def unsubscribe(subscriber, event):
-    if event not in PubSubParams.subscriptions.keys():
+def unsubscribe(subscriber, message):
+    if message not in PubSubParams.subscriptions.keys():
         return
 
-    if subscriber not in PubSubParams.subscriptions[event]:
+    if subscriber not in PubSubParams.subscriptions[message]:
         return
 
-    PubSubParams.subscriptions[event].remove(subscriber)
+    PubSubParams.subscriptions[message].remove(subscriber)
 
 
 
-def publish(event, publisher, data=None):
+def publish(message, publisher, *data):
     # don't put in queue if nobody is subscribe to it
-    if event not in PubSubParams.subscriptions.keys():
+    if message not in PubSubParams.subscriptions.keys():
         return
 
-    PubSubParams.message_queue.append((event, publisher, data))
+    PubSubParams.message_queue.append((message, publisher, data))
 
 
-def update(dt):
+def handle_messages(dt=0):
     # notify all subscribers
-    for event, publisher, data in PubSubParams.message_queue:
-        for sub in PubSubParams.subscriptions[event]:
+    for message, publisher, data in PubSubParams.message_queue:
+        for sub in PubSubParams.subscriptions[message]:
             notify = getattr(sub, "notify", None)
             if notify is None:
-                en.graphical_logger.log(
-                    str(sub) + " has no member called notify.")
                 return
+            notify(message, publisher, data)
 
-            if not callable(notify):
-                en.graphical_logger.log(
-                    str(sub) + "'s member, notify, is not callable.")
-                return
-
-            notify(event, publisher, data)
-
-    # clear event queue
+    # clear message queue
     PubSubParams.message_queue = []

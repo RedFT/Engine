@@ -78,7 +78,7 @@ def main_loop():
         en.graphical_logger.update(dt)
 
         # Handle Messages in Message Queue
-        en.pubsub.update(dt)
+        en.pubsub.handle_messages(dt)
 
         # Game Rendering
         AppParams.scenes[-1].draw()
