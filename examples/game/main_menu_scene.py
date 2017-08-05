@@ -1,9 +1,9 @@
 import numpy as np
 import pygame as pg
 import engine as en
-import constants as cn
+from . import constants as cn
 
-from game_scene import GameScene
+from .game_scene import GameScene
 
 class MainMenuScene(en.scene.Scene):
     def __init__(self):

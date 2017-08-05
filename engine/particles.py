@@ -41,7 +41,7 @@ class Particle(entity.Entity):
         s.set_colorkey((255, 255, 255))
 
         pg.draw.circle(s, self.color,
-                       map(int, (self.size, self.size)), int(self.size))
+                       list(map(int, (self.size, self.size))), int(self.size))
         s.set_alpha(int(self.alpha * 255))
 
         draw_position = np.array(self.position)

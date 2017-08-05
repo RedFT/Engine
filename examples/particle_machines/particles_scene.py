@@ -1,7 +1,7 @@
 import engine as en
 
-from rain_maker import RainMaker
-from smoke_machine import SmokeMachine
+from .rain_maker import RainMaker
+from .smoke_machine import SmokeMachine
 
 class ParticlesScene(en.scene.Scene):
     def __init__(self):

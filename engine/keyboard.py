@@ -11,13 +11,13 @@ def begin_new_frame(dt):
     KeyboardParams.pressed_keys.clear()
     KeyboardParams.released_keys.clear()
 
-    for key in KeyboardParams.held_keys.keys():
+    for key in list(KeyboardParams.held_keys.keys()):
         KeyboardParams.held_keys[key] += dt
 
 
 def register_key_up(key):
     KeyboardParams.released_keys[key] = True
-    if key in KeyboardParams.held_keys.keys():
+    if key in list(KeyboardParams.held_keys.keys()):
         del KeyboardParams.held_keys[key]
 
 
@@ -27,23 +27,23 @@ def register_key_down(key):
 
 
 def was_pressed(key):
-    if key in KeyboardParams.pressed_keys.keys():
+    if key in list(KeyboardParams.pressed_keys.keys()):
         return True
     return False
 
 
 def was_released(key):
-    if key in KeyboardParams.released_keys.keys():
+    if key in list(KeyboardParams.released_keys.keys()):
         return True
     return False
 
 
 def is_held(key):
-    if key in KeyboardParams.held_keys.keys():
+    if key in list(KeyboardParams.held_keys.keys()):
         return True
     return False
 
 
 def get_hold_time(key):
-    if key in KeyboardParams.held_keys.keys():
+    if key in list(KeyboardParams.held_keys.keys()):
         return KeyboardParams.held_keys[key]

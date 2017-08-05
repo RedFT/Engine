@@ -2,14 +2,14 @@ import engine as en
 import pygame as pg
 import numpy as np
 
-import constants as cn
+from . import constants as cn
 
 def generate_valid_move_cells(position, move_range):
     right = np.array([1, 0])
     down = np.array([0, 1])
     valid_move_cells = []
-    for d in xrange(1, move_range+1):
-        for a in xrange(1, d+1):
+    for d in range(1, move_range+1):
+        for a in range(1, d+1):
             b = d - a
             cell1 = a*right + b*down
             # reflect cell1 over vertical
@@ -75,7 +75,8 @@ class Piece(en.entity.Entity):
 
     def update(self, dt):
         self.position_in_px = self.lerp(self.position_in_px, self.move_speed)
-        self.rect[:2] = self.position_in_px
+        self.rect[0] = self.position_in_px[0]
+        self.rect[1] = self.position_in_px[1]
 
     def draw(self):
         surf = en.app.get_current_scene().scene_surface

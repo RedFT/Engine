@@ -19,7 +19,7 @@ class Animation:
         res_dir = en.get_resources_directory()
         os_filename = os.path.join(res_dir, filename)
 
-        if os_filename in Animation._animations.keys():
+        if os_filename in list(Animation._animations.keys()):
             self.animation_rects = Animation._animations[os_filename]
             self.num_frames = len(self.animation_rects)
             return Animation._animations[os_filename]

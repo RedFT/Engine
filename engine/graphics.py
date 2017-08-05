@@ -27,7 +27,7 @@ def load_image(filename):
     res_dir = en.get_resources_directory()
     os_filename = os.path.join(res_dir, filename)
 
-    if os_filename in GraphicsParams.loaded_images.keys():
+    if os_filename in list(GraphicsParams.loaded_images.keys()):
         return GraphicsParams.loaded_images[os_filename]
 
     en.graphical_logger.log("Loaded Image " + os_filename)

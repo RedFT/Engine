@@ -1,6 +1,6 @@
 import engine as en
 import pygame as pg
-import constants as cn
+from . import constants as cn
 
 class InfoType:
     MOVE=1
@@ -32,8 +32,8 @@ class Board(en.entity.Entity):
 
     def update(self, dt):
         mouse_pos = en.mouse.get_position()
-        cell_x = mouse_pos[0] / cn.CELL_WIDTH
-        cell_y = mouse_pos[1] / cn.CELL_HEIGHT
+        cell_x = mouse_pos[0] // cn.CELL_WIDTH
+        cell_y = mouse_pos[1] // cn.CELL_HEIGHT
 
         if en.mouse.was_pressed(0):
             self.info_type = InfoType.MOVE
@@ -55,7 +55,7 @@ class Board(en.entity.Entity):
         map_width = self.tiles['width']
         for i, tile in enumerate(self.tiles['data']):
             x = (i % cn.BOARD_WIDTH) * cn.CELL_WIDTH
-            y = (i / cn.BOARD_WIDTH) * cn.CELL_WIDTH
+            y = (i // cn.BOARD_WIDTH) * cn.CELL_WIDTH
 
             rect = self.tiles['rects'][tile]
             tile_img = self.tiles['image'].subsurface(rect)

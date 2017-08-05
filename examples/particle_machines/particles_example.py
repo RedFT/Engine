@@ -1,6 +1,6 @@
 if __name__ == '__main__':
     import engine as en
-    from particles_scene import ParticlesScene
+    from .particles_scene import ParticlesScene
     en.app.initialize(
         (640, 420),
         "Particles Example",

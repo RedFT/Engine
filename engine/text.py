@@ -12,7 +12,7 @@ def initialize():
 
 def load_font(font_name, font_size):
     key = font_name + str(int(font_size))
-    if key in TextParams.fonts.keys():
+    if key in list(TextParams.fonts.keys()):
         return TextParams.fonts[key]
 
     res_dir = en.get_resources_directory()

@@ -1,7 +1,7 @@
 import numpy as np
 import pygame as pg
 import engine as en
-import constants as cn
+from . import constants as cn
 
 class InGameMenuScene(en.scene.Scene):
     def __init__(self):

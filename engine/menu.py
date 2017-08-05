@@ -27,7 +27,7 @@ class Menu(entity.Entity):
                 if not child.rect.collidepoint(click_pos):
                     continue
 
-                if child not in self.cb_map.keys():
+                if child not in list(self.cb_map.keys()):
                     continue
 
                 self.cb_map[child](child)

@@ -1,12 +1,12 @@
 import numpy as np
 import pygame as pg
 import engine as en
-import constants as cn
+from . import constants as cn
 
-from board import Board
-from pieces import Warrior, Ranger, Mage
+from .board import Board
+from .pieces import Warrior, Ranger, Mage
 
-from in_game_menu_scene import InGameMenuScene
+from .in_game_menu_scene import InGameMenuScene
 
 class GameScene(en.scene.Scene):
     def __init__(self):

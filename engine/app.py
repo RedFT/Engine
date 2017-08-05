@@ -19,6 +19,7 @@ def initialize(screen_size=(640, 420), caption="App", scale=1, show_fps=True, sh
     AppParams.show_scene_stack = show_scene_stack
 
     # initialize pygame
+    pg.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
     pg.init()
     AppParams.game_clock = pg.time.Clock()
 
@@ -63,7 +64,7 @@ def pop_to_scene(index):
 
 def main_loop():
     if AppParams.scenes == []:
-        print "No scenes on scene stack"
+        print("No scenes on scene stack")
 
     while AppParams.scenes:
         dt= AppParams.game_clock.tick(60)

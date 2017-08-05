@@ -13,9 +13,9 @@ def load_tiles(tmx_filename, scale):
 
     tilemap = tmx['tilesets'][0]
     rects = [None]
-    for i in xrange(tilemap['tilecount']):
-        row = i / (tilemap['imagewidth']/tilemap['tilewidth'])
-        col = i % (tilemap['imagewidth']/tilemap['tilewidth'])
+    for i in range(tilemap['tilecount']):
+        row = i // (tilemap['imagewidth']//tilemap['tilewidth'])
+        col = i % (tilemap['imagewidth']//tilemap['tilewidth'])
 
         tx = tilemap['margin'] + col * (tilemap['tilewidth'] + tilemap['spacing'])
         ty = tilemap['margin'] + row * (tilemap['tileheight'] + tilemap['spacing'])
